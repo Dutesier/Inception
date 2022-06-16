@@ -2,8 +2,46 @@ version: '3'
 
 services:
   nginx:
+    depends_on:
+      - mariadb
+      - wordpress
     build: requirements/nginx
     container_name: nginx
+    environment:
+      USER_LOGIN: "${USER_LOGIN}"
     restart: always
+    networks:
+      - my_network
     ports:
       - "8080:80"
+
+  wordpress:
+    depends_on:
+      - mariadb
+    build: requirements/wordpress
+    container_name: wordpress
+    restart: always
+    networks:
+      - my_network
+    volumes:
+      - db:/tmp/db
+
+  mariadb:
+    build: requirements/mariadb
+    container_name: mariadb
+    restart: always
+    networks:
+      - my_network
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      device: /home/${USER_LOGIN}/data/db
+      type: none
+      o: bind
+
+networks:
+  my_network:

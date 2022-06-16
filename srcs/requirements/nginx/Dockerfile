@@ -7,6 +7,6 @@ RUN chown -R www:www /www
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 COPY ./tools/ /www
-RUN echo 1
+RUN echo "--nginx should be setup, trying to run--"
 
 CMD nginx -g "daemon off;"
