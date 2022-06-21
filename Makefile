@@ -16,12 +16,15 @@ run: build
 down:
 	docker-compose $(FLAGS) down
 
-clean:
-	docker rm -f $(shell docker ps -al -q --filter name=$(NAME))
-	docker network rm $(shell docker network ls -q --filter name=$(NAME))
-	docker volume rm $(shell docker volume ls -q --filter name=$(NAME))
+stop:
+	docker-compose $(FLAGS) stop
+
+clean: stop
+	docker rm -f $(shell docker ps -al -q --filter name=$(NAME)) || echo removed container from $(NAME)
+	docker network rm $(shell docker network ls -q --filter name=$(NAME)) || echo removed network from $(NAME)
+	docker volume rm $(shell docker volume ls -q --filter name=$(NAME)) || echo removed volume from $(NAME)
 
 fclean: clean
-	docker rmi $(shell docker images -aq)
+	docker system prune -af
 
 re: fclean all
