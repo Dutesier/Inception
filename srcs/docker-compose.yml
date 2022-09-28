@@ -9,11 +9,14 @@ services:
     container_name: nginx
     environment:
       USER_LOGIN: "${USER_LOGIN}"
+      WP_IP: "${WP_IP}"
     restart: always
     networks:
       - my_network
     ports:
       - "8080:80"
+    volumes:
+      - wp:/www
 
   wordpress:
     depends_on:
@@ -21,17 +24,26 @@ services:
     build: requirements/wordpress
     container_name: wordpress
     restart: always
+    environment:
+      USER_LOGIN: "${USER_LOGIN}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_NAME: "${DB_NAME}"
+      MARIADB_HOST: "mariadb:3306"
     networks:
       - my_network
     volumes:
-      - db:/tmp/db
+      - wp:/var/www/html
 
   mariadb:
     build: requirements/mariadb
     container_name: mariadb
     environment:
       USER_LOGIN: "${USER_LOGIN}"
-      MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_NAME: "${DB_NAME}"
+      WORDPRESS_IP: wordpress
     restart: always
     networks:
       - my_network
@@ -43,6 +55,12 @@ volumes:
     driver: local
     driver_opts:
       device: /home/${USER_LOGIN}/data/db
+      type: none
+      o: bind
+  wp:
+    driver: local
+    driver_opts:
+      device: /home/${USER_LOGIN}/data/wp
       type: none
       o: bind
 

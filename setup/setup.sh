@@ -10,6 +10,14 @@ else
     mkdir -p /home/${USER}/data/db
 fi
 
+# Setup a wordpress(wp) folder
+if [[ -d "/home/${USER}/data/wp" ]]; then
+    echo "Found /home/${USER}/data/wp folder"
+else
+    echo "Building /home/${USER}/data/wp folder"
+    mkdir -p /home/${USER}/data/wp
+fi
+
 # Create directories for all containers
 for container in ${Containers[@]}; do
     echo "Setting up $container directories"
