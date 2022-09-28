@@ -29,6 +29,9 @@ services:
   mariadb:
     build: requirements/mariadb
     container_name: mariadb
+    environment:
+      USER_LOGIN: "${USER_LOGIN}"
+      MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
     restart: always
     networks:
       - my_network

@@ -8,16 +8,16 @@ all: $(NAME)
 $(NAME): run
 
 build:
-	docker-compose $(FLAGS) build
+	docker compose $(FLAGS) build
 
 run: build
-	docker-compose $(FLAGS) up --detach
+	docker compose $(FLAGS) up --detach
 
 down:
-	docker-compose $(FLAGS) down
+	docker compose $(FLAGS) down
 
 stop:
-	docker-compose $(FLAGS) stop
+	docker compose $(FLAGS) stop
 
 clean: stop
 	docker rm -f $(shell docker ps -al -q --filter name=$(NAME)) || echo removed container from $(NAME)
