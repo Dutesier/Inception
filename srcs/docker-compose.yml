@@ -9,6 +9,7 @@ services:
     container_name: nginx
     environment:
       USER_LOGIN: "${USER_LOGIN}"
+      WP_NAME: "${WP_NAME}"
       WP_IP: "${WP_IP}"
     restart: always
     networks:
@@ -16,7 +17,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - wp:/www
+      - wp:/var/www/html
 
   wordpress:
     depends_on:
@@ -29,7 +30,8 @@ services:
       DB_USER: "${DB_USER}"
       DB_PASSWORD: "${DB_PASSWORD}"
       DB_NAME: "${DB_NAME}"
-      MARIADB_HOST: "mariadb:3306"
+      DB_HOST_IP: "${DB_HOST_IP}"
+      DB_HOST_PORT: "${DB_HOST_PORT}" 
     networks:
       - my_network
     volumes:
@@ -43,7 +45,7 @@ services:
       DB_USER: "${DB_USER}"
       DB_PASSWORD: "${DB_PASSWORD}"
       DB_NAME: "${DB_NAME}"
-      WORDPRESS_IP: wordpress
+      WORDPRESS_IP: "${WP_IP}"
     restart: always
     networks:
       - my_network
