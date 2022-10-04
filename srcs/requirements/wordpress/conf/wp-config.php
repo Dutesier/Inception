@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('DB_NAME') );
+define( 'DB_NAME', 'MYSQL_D');
 
 /** Database username */
-define( 'DB_USER', getenv('DB_USER') );
+define( 'DB_USER', 'MYSQL_U');
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
+define( 'DB_PASSWORD', 'MYSQL_P');
 
 /** Database hostname */
-define( 'DB_HOST', getenv('DB_HOST_IP'));
+define( 'DB_HOST', 'MYSQL_DB_H');
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -80,6 +80,7 @@ $table_prefix = 'wp_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', true );
+define('WP_DEBUG_LOG', '/var/log/wp-errors.log');
 
 /* Add any custom values between this line and the "stop editing" line. */
 

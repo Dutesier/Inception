@@ -14,4 +14,4 @@ RUN chmod 711 /tmp/tools/init_database.sh
 #RUN /tmp/tools/init_database.sh
 
 
-CMD ["/bin/bash", "/tmp/tools/init_database.sh"]
+ENTRYPOINT [ "/tmp/tools/init_database.sh"]

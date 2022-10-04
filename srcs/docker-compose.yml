@@ -10,10 +10,10 @@ services:
     environment:
       USER_LOGIN: "${USER_LOGIN}"
       WP_NAME: "${WP_NAME}"
-      WP_IP: "${WP_IP}"
+      WP_IP: "${WP_PORT}"
     restart: always
     networks:
-      - my_network
+      - network
     ports:
       - "8080:80"
     volumes:
@@ -27,13 +27,13 @@ services:
     restart: always
     environment:
       USER_LOGIN: "${USER_LOGIN}"
-      DB_USER: "${DB_USER}"
-      DB_PASSWORD: "${DB_PASSWORD}"
-      DB_NAME: "${DB_NAME}"
-      DB_HOST_IP: "${DB_HOST_IP}"
-      DB_HOST_PORT: "${DB_HOST_PORT}" 
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_DB_HOST: "${DB_HOST_IP}"
+      MARIADB_HOST_PORT: "${DB_HOST_PORT}" 
     networks:
-      - my_network
+      - network
     volumes:
       - wp:/var/www/html
 
@@ -45,10 +45,10 @@ services:
       DB_USER: "${DB_USER}"
       DB_PASSWORD: "${DB_PASSWORD}"
       DB_NAME: "${DB_NAME}"
-      WORDPRESS_IP: "${WP_IP}"
+      WORDPRESS_IP: "${WP_NAME}"
     restart: always
     networks:
-      - my_network
+      - network
     volumes:
       - db:/var/lib/mysql
 
@@ -67,4 +67,4 @@ volumes:
       o: bind
 
 networks:
-  my_network:
+  network:
