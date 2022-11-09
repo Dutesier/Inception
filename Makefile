@@ -30,24 +30,22 @@ stop:
 	docker compose $(FLAGS) stop
 
 remove-containers: stop
-	@docker rm -f mariadb wordpress nginx || true
+	@docker rm -f mariadb wordpress nginx && echo "Removed containers" || echo "Containers already removed"
 
 remove-images: remove-containers
-	docker rmi inception-mariadb inception-wordpress inception-nginx || echo "Images already erased"
+	@docker rmi inception-mariadb inception-wordpress inception-nginx && echo "Erased images" || echo "Images already erased"
 
 remove-volumes: remove-containers
-	docker volume rm inception_db inception_wp || echo "Volumes already erased"
-	@sudo rm -rf /home/${USER}/data/wp || echo "No wp folder"
-	@sudo rm -rf /home/${USER}/data/db || echo "No db folder"
+	@docker volume rm inception_db inception_wp && echo "Erased volumes" || echo "Volumes already erased"
+	@sudo rm -rf /home/${USER}/data/wp && echo "Erased wp folder" || echo "No wp folder"
+	@sudo rm -rf /home/${USER}/data/db && echo "Erased db folder" || echo "No db folder"
 
 remove-network:
-	docker network rm inception_network || echo "Network already erased"
-
-check-hosts:
+	@docker network rm inception_network && echo "Removed network" || echo "Network already erased"
 
 
 clean: remove-volumes remove-network
-	@sudo mv /etc/old_hosts /etc/hosts || true
+	@sudo mv /etc/old_hosts /etc/hosts && echo "Reset /etc/hosts file to default" || true
 
 fclean: clean remove-images
 
