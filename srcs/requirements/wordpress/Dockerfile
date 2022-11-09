@@ -48,4 +48,3 @@ COPY ./conf/wordpress_pool.conf /etc/php/7.3/fpm/pool.d/wordpress_pool.conf
 COPY ./tools/wordpress_setup.sh /tmp/wordpress_setup.sh
 RUN chmod 711 /tmp/wordpress_setup.sh
 ENTRYPOINT [ "/tmp/wordpress_setup.sh" ] 
-
