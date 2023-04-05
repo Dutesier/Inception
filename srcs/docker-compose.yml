@@ -3,8 +3,8 @@ version: '3'
 services:
   nginx:
     depends_on:
-      - mariadb
       - wordpress
+      - mariadb
     build: requirements/nginx
     container_name: nginx
     environment:
@@ -31,7 +31,13 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
       MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_DB_HOST: "mariadb"
-      MARIADB_HOST_PORT: "3306" 
+      MARIADB_HOST_PORT: "3306"
+      WORDPRESS_REGULAR_USER: "${WORDPRESS_REGULAR_USER}"
+      WORDPRESS_REGULAR_USER_PASS: "${WORDPRESS_REGULAR_USER_PASS}"
+      WORDPRESS_REGULAR_USER_EMAIL: "${WORDPRESS_REGULAR_USER_EMAIL}"
+      WORDPRESS_PRIVILEDGED_USER: "${WORDPRESS_PRIVILEDGED_USER}"
+      WORDPRESS_PRIVILEDGED_USER_PASS: "${WORDPRESS_PRIVILEDGED_USER_PASS}"
+      WORDPRESS_PRIVILEDGED_USER_EMAIL: "${WORDPRESS_PRIVILEDGED_USER_EMAIL}"
     networks:
       - network
     volumes:

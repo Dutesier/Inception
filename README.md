@@ -10,3 +10,11 @@ configured) only without nginx.
 - [ ] A volume that contains a WordPress database.
 - [ ] A second volume that contains the WordPress website files.
 - [ ] A docker-network that establishes the connection between the containers.
+
+## Setup
+Clone the repository
+cd setup
+./setup.sh
+cd ..
+configure you .env file (USE YOUR USER!)
+make
