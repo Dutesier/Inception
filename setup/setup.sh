@@ -40,5 +40,5 @@ if [[ ! -e "../srcs/.env" ]]; then
     echo "No .env file found, creating a new one"
     cp ../srcs/.env.example ../srcs/.env
     sed -i "s/USER_LOGIN=xxx/USER_LOGIN=$USER/g" ../srcs/.env
-    sed -i "s/WORDPRESS_REGULAR_USER=xxx/WORDPRESS_REGULAR_USER=$USER/g" ../srcs/.env
+    sed -i "s/WORDPRESS_REGULAR_USER=xx/WORDPRESS_REGULAR_USER=$USER/g" ../srcs/.env
 fi
